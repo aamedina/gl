@@ -11,10 +11,15 @@
 
 (generate-webgl-constants)
 
+(defn resize
+  [width height]
+  (set! (.-width +canvas+) width)
+  (set! (.-height +canvas+) height)
+  (gl/viewport 0 0 width height))
+
 (defn make-window
   [width height]
   (when-not (.contains js/document.body +canvas+)
     (.appendChild js/document.body +canvas+))
-  (set! (.-width +canvas+) width)
-  (set! (.-height +canvas+) height)
+  (resize width height)
   +canvas+)
