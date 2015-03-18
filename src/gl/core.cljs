@@ -1,5 +1,4 @@
 (ns gl.core
-  (:require [goog.webgl :as gl])
   (:require-macros [gl.core :as gl :refer [generate-webgl-constants]]))
 
 (defonce ^:const +canvas+

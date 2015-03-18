@@ -47,7 +47,6 @@
   (gl/vertex-attrib-pointer vertex-pos 3 gl/FLOAT false 0 0)
   (gl/bind-buffer gl/ARRAY_BUFFER color-buf)
   (gl/vertex-attrib-pointer vertex-color 4 gl/FLOAT false 0 0)
-  (js/console.log move-matrix perspective-matrix)
   (gl/uniform-matrix4fv (gl/get-uniform-location prog "uPMatrix")
                         false perspective-matrix)
   (gl/uniform-matrix4fv (gl/get-uniform-location prog "uMVMatrix")
