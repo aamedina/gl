@@ -465,3 +465,9 @@
   []
   `(do
      ~@(clojure.core/map generate-webgl-constant gl-constants)))
+
+(defmacro load-shader
+  [path]
+  (slurp path))
+
+
