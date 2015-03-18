@@ -56,5 +56,7 @@
     
     (gl/delete-shader vertex-shader)
     (gl/delete-shader fragment-shader)
+
+    (gl/use-program program)
     
     program))
