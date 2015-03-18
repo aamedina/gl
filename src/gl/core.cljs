@@ -29,10 +29,13 @@
   (let [shader (gl/create-shader (case type
                                    :vertex VERTEX_SHADER
                                    :fragment FRAGMENT_SHADER))]
+    
     (gl/shader-source shader source)
     (gl/compile-shader shader)
+    
     (when (false? (gl/get-shader-parameter shader COMPILE_STATUS))
       (throw (gl/get-shader-info-log shader)))
+    
     shader))
 
 (defn make-program
@@ -40,14 +43,18 @@
   (let [vertex-shader (make-shader :vertex vertex-source)
         fragment-shader (make-shader :fragment fragment-source)
         program (gl/create-program)]
+    
     (gl/attach-shader program vertex-shader)
     (gl/attach-shader program fragment-shader)
     (gl/bind-attrib-location program 0 "position")
     (gl/link-program program)
+    
     (when (false? (gl/get-program-parameter program LINK_STATUS))
       (let [m {:info (gl/get-program-info-log program)
                :status (gl/get-program-parameter program VALIDATE_STATUS)}]
         (throw (ex-info (gl/get-error) m))))
+    
     (gl/delete-shader vertex-shader)
     (gl/delete-shader fragment-shader)
+    
     program))
