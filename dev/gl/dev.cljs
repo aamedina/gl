@@ -2,7 +2,11 @@
   (:require [figwheel.client :as figwheel]
             [gl.core :as gl]
             [gl.net :as net]
-            [goog.vec.mat4f :as mat4]))
+            [gl.math :as math]
+            [goog.vec.mat4f :as mat4]
+            [goog.vec.Quaternion :as q]
+            [goog.dom.animationFrame :as af]
+            [gl.pipeline :as pipe]))
 
 (figwheel/start {:build-id "dev"})
 
@@ -32,9 +36,9 @@
       vertex-pos (gl/get-attrib-location prog "aVertexPosition")
       pos-buf (gl/create-buffer)
       color-buf (gl/create-buffer)
-      perspective-matrix (-> (mat4/create)
+      perspective-matrix (-> (math/mat4)
                              (mat4/makePerspective 45 (/ 800 640) 0.1 100.0))
-      move-matrix (-> (mat4/makeIdentity (mat4/create))
+      move-matrix (-> (math/mat4)
                       (mat4/translate 0.0 0.0 -6.0))]
   (gl/bind-buffer gl/ARRAY_BUFFER pos-buf)
   (gl/buffer-data gl/ARRAY_BUFFER (js/Float32Array. vertices) gl/STATIC_DRAW)
