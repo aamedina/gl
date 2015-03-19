@@ -36,8 +36,7 @@
       vertex-pos (gl/get-attrib-location prog "aVertexPosition")
       pos-buf (gl/create-buffer)
       color-buf (gl/create-buffer)
-      perspective-matrix (-> (math/mat4)
-                             (mat4/makePerspective 45 (/ 800 640) 0.1 100.0))
+      perspective-matrix (pipe/perspective-camera 45 (/ 800 640) 0.1 100.0)
       move-matrix (-> (math/mat4)
                       (mat4/translate 0.0 0.0 -6.0))]
   (gl/bind-buffer gl/ARRAY_BUFFER pos-buf)
